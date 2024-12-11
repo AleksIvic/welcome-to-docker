@@ -11,6 +11,14 @@ COPY package*.json ./
 COPY ./src ./src
 COPY ./public ./public
 
+RUN npm config set strict-ssl false
+
+RUN npm config set strict-ssl false \
+    && npm install \
+    && npm install -g serve \
+    && npm run build \
+    && rm -fr node_modules
+
 # Install node packages, install serve, build the app, and remove dependencies at the end
 RUN npm install \
     && npm install -g serve \
